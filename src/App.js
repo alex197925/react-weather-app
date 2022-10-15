@@ -11,7 +11,6 @@ function App() {
    //Get data from API with axios
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=4068248e6fdf0020b855d97f00767e29`;
 
-
   const searchLocation = (event) => {
     if (event.key === 'Enter') {
       axios.get(url).then((response) => {
@@ -35,26 +34,31 @@ function App() {
     <div className="container">
       <div className="top">
         <div className="location">
-          <p>Antwerp</p>
+          <p>{data.name}</p>
         </div>
         <div className="temp">
-          <h1>14°C</h1>
+          {data.main ? <h1>{data.main.temp}°F</h1> : null}
+          {/*<h1>{data.main.temp}°F</h1> Temp not exist have to check */}
         </div>
         <div className="description">
-          <p>Sunny</p>
+          {/*Check if its: Cloud, Sunny.....*/}
+          <p>{data.weather ? <p>{data.weather[0].main}</p> : null}</p>
         </div>
       </div>
       <div className="bottom">
         <div className="feels">
-          <p>16°C</p>
+          {/*Check feels like temperature*/}
+          {data.main ? <p className="bold">{data.main.feels_like} °F</p> : null}
           <p className="bold">Feels Like</p>
         </div>
         <div className="humidity">
-          <p>20%</p>
+          {/*Check humidity*/}
+          {data.main ? <p className="bold">{data.main.humidity} %</p> : null}
           <p className="bold">Humidity</p>
         </div>
         <div className="wind">
-          <p>14 km/h</p>
+          {/*Check wind*/}
+          {data.wind ? <p className="bold">{data.wind.speed} MPH</p> : null}
           <p className="bold">Wind</p>
         </div>
       </div>
